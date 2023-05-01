@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: react-js
+  template:
+    metadata:
+      labels:
+        app: react-js
+    spec:
+      containers:
+      - name: react-js
+        image: aneeshmbhat/web-crawler-client
+        resources:
+          limits:
+            memory: "756Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: react-js
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
