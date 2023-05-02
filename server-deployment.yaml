@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-js
-        image: aneeshmbhat/web-crawler-server
+        image: aneeshmbhat/server-webcrawler:v4
         resources:
           limits:
             memory: "356Mi"

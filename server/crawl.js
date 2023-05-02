@@ -6,31 +6,32 @@ const { JSDOM } = require("jsdom");
 // pages - key:value pairs where key is the url of the page & value is an array of urls present in the page
 // visited - object that is used to show which urls have already been crawled
 async function crawlPage(baseURL, currentURL, pages, visited) {
-  const baseURLObj = new URL(baseURL);
-  const currentURLObj = new URL(currentURL);
-
-  //This condition is present so as to make sure that we dont add external site links
-  if (baseURLObj.hostname !== currentURLObj.hostname) {
-    return pages;
-  }
-
-  //normalizing URL so as to remove inconsistencies
-  const normalizedCurrentURL = normalizeURL(currentURL);
-
-  //If the current url has no entry than create a new entry with an empty array
-  if (pages[normalizedCurrentURL] == null) pages[normalizedCurrentURL] = [];
-
-  //If already visited then stop the process here
-  if (visited[normalizedCurrentURL]) {
-    return pages;
-  }
-
-  //If not visited, make it visited & log we are currently crawling said website
-  visited[normalizedCurrentURL] = 1;
-  console.log(`actively crawling: ${currentURL}`);
-
-  //try catch block for fetching current url & processing
+  //try catch block
   try {
+    const baseURLObj = new URL(baseURL);
+    const currentURLObj = new URL(currentURL);
+  
+    //This condition is present so as to make sure that we dont add external site links
+    if (baseURLObj.hostname !== currentURLObj.hostname) {
+      return pages;
+    }
+  
+    //normalizing URL so as to remove inconsistencies
+    const normalizedCurrentURL = normalizeURL(currentURL);
+  
+    //If the current url has no entry than create a new entry with an empty array
+    if (pages[normalizedCurrentURL] == null) pages[normalizedCurrentURL] = [];
+  
+    //If already visited then stop the process here
+    if (visited[normalizedCurrentURL]) {
+      return pages;
+    }
+  
+    //If not visited, make it visited & log we are currently crawling said website
+    visited[normalizedCurrentURL] = 1;
+    console.log(`actively crawling: ${currentURL}`);
+
+    //Fetching current url
     const resp = await fetch(currentURL);
 
     //log error if url cant be fetched due to some server or client error

@@ -8,7 +8,7 @@ const port = 5000;
 app.use(cors());
 
 // routing get HTTP request to crawl
-app.get("/", async (req, res) => {
+app.get("/crawl", async (req, res) => {
   const baseURL = req.query.url;
   const pages = await crawlPage(baseURL, baseURL, {}, {});
   res.send(pages);

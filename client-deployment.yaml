@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: react-js
-        image: aneeshmbhat/web-crawler-client
+        image: aneeshmbhat/client-webcrawler:v3
         resources:
           limits:
             memory: "756Mi"

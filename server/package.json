@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon router.js",
+    "start": "nodemon -L router.js",
     "test": "jest"
   },
   "repository": {

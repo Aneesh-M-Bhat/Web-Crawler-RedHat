@@ -8,7 +8,7 @@ function App() {
   const submitHandler = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    const response = await axios.get(`http://localhost:5000/?url=${URL}`);
+    const response = await axios.get(`http://localhost:5000/crawl?url=${URL}`);
     // console.log(response.data);
     setURL(Object.keys(response.data)[0]);
     setSiteObj(response.data);
